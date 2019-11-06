@@ -7,7 +7,7 @@
 - name: ComputeLocalEphemeral
   description: |
     Per-role compute storage backend - basic Compute Node with local ephemeral disks
-  CountDefault: 2
+  CountDefault: 1
   networks:
     - InternalApi
     - Tenant

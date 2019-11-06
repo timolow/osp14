@@ -25,7 +25,7 @@
 "mac":["00:50:56:8d:bc:88"],
 "name":"compute1",
 "arch":"x86_64",
-"capabilities":"profile:compute,node:compute1,boot_option:local",
+"capabilities":"profile:ComputeLocalEphemeral,node:compute1,boot_option:local",
 "pm_type":"manual-management"
 }
 ]
