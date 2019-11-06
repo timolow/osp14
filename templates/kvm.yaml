@@ -1,0 +1,9 @@
+parameter_defaults:
+  ComputeLocalEphemeralExtraConfig:
+    nova::compute::libvirt::libvirt_hw_machine_type: x86_64=pc-i440fx-rhel7.2.0
+#    nova::config::nova_config:
+#      nova::compute::libvirt::libvirt_hw_machine_type: x86_64=pc-i440fx-rhel7.2.0
+  ComputeExtraConfig:
+    nova::compute::libvirt::libvirt_hw_machine_type: x86_64=pc-i440fx-rhel7.2.0
+#    nova::config::nova_config:
+#      nova::compute::libvirt::libvirt_hw_machine_type: x86_64=pc-i440fx-rhel7.2.0

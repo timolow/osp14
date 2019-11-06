@@ -1,0 +1,11 @@
+{
+"nodes":[
+{
+"mac":["00:50:56:8d:8d:32"],
+"name":"compute02",
+"arch":"x86_64",
+"capabilities":"profile:compute,node:compute02,boot_option:local",
+"pm_type":"manual-management"
+}
+]
+}

@@ -1,0 +1,36 @@
+parameter_defaults:
+  ExtraConfig:
+    RabbitUserName: "admin"
+    RabbitPassword: "password"
+
+  controllerExtraConfig:
+    nova::cpu_allocation_ratio: "2.0"
+    nova::disk_allocation_ratio: "1.0"
+    nova::ram_allocation_ratio: "1.0"
+    nova::scheduler::filter::scheduler_default_filters:
+      - 'RetryFilter'
+      - 'AvailabilityZoneFilter'
+      - 'RamFilter'
+      - 'DiskFilter'
+      - 'ComputeFilter'
+      - 'ComputeCapabilitiesFilter'
+      - 'ImagePropertiesFilter'
+      - 'ServerGroupAntiAffinityFilter'
+      - 'ServerGroupAffinityFilter'
+      - 'AggregateMultiTenancyIsolation'
+      - 'AggregateInstanceExtraSpecsFilter'
+      - 'CoreFilter'
+    controller_classes:
+      - ::nova::scheduler::filter
+    #https://access.redhat.com/solutions/3139721
+    nova::config::nova_config:
+      DEFAULT/notification_format:
+          value: 'unversioned'
+#    rabbitmq_environment:
+#      RABBITMQ_NODENAME: "rabbit@%{::hostname}"
+#      RABBITMQ_SERVER_ERL_ARGS: '"+K true +A128 +P 1048576 -kernel inet_default_connect_options [{nodelay,true},{raw,6,18,<<5000:64/native>>}] -kernel inet_def$
+    #https://access.redhat.com/solutions/3139721
+    NovaComputeExtraConfig:
+      nova::config::nova_config:
+        DEFAULT/notification_format:
+          value: 'unversioned'

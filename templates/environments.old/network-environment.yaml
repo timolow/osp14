@@ -1,0 +1,51 @@
+
+resource_registry:
+  OS::TripleO::BlockStorage::Net::SoftwareConfig: nic-configs/cinder-storage.yaml
+  OS::TripleO::Compute::Net::SoftwareConfig: nic-configs/compute.yaml
+  OS::TripleO::Controller::Net::SoftwareConfig: nic-configs/controller.yaml
+  OS::TripleO::ObjectStorage::Net::SoftwareConfig: nic-configs/swift-storage.yaml
+  OS::TripleO::CephStorage::Net::SoftwareConfig: nic-configs/ceph-storage.yaml
+
+parameter_defaults:
+  MgmtBridgeName: "br-mgmt"
+  ControlPlaneSubnetCidr: '24'	# CIDR subnet mask length for CtlPlanePxeNet network.
+  ControlPlaneDefaultRoute: 10.1.2.1	# Gateway for CtlPlanePxeNet network.
+  EC2MetadataIp: 10.2.1.16  # Generally the IP of the Director on CtlPlanePxeNet network.
+  InternalApiNetCidr: 172.27.0.0/22
+  StorageNetCidr: 172.27.8.0/22
+  StorageMgmtNetCidr: 172.27.12.0/22
+  TenantNetCidr: 172.27.4.0/22
+  ExternalNetCidr: 10.240.1.0/24
+  InternalApiNetworkVlanID: 950
+  StorageNetworkVlanID: 952
+  StorageMgmtNetworkVlanID: 953
+  TenantNetworkVlanID: 951
+  ExternalNetworkVlanID: 12
+  InternalApiAllocationPools: [{'start': '172.27.0.10', 'end': '172.27.0.200'}]
+  StorageAllocationPools: [{'start': '172.27.8.10', 'end': '172.27.8.200'}]
+  StorageMgmtAllocationPools: [{'start': '172.27.12.10', 'end': '172.27.12.200'}]
+  TenantAllocationPools: [{'start': '172.27.4.10', 'end': '172.27.4.200'}]
+  ExternalAllocationPools: [{'start': '10.240.1.150', 'end': '10.240.1.200'}]
+  ManagementAllocationPools: [{'start': '10.240.1.100', 'end': '10.240.1.149'}]
+  ExternalInterfaceDefaultRoute: 10.240.1.1	# Gateway router for the external network
+  ManagementInterfaceDefaultRoute: 10.240.1.1	# Gateway router for the management network (same as external)
+  # Define the DNS servers (maximum 2) for the overcloud nodes
+  DnsServers: ["8.8.8.8","8.8.4.4"]
+  # Customize bonding options, e.g. "mode=4 lacp_rate=1 updelay=1000 miimon=100"
+  BondInterfaceOvsOptions: "mode=4 lacp_rate=1 updelay=1000 miimon=100 xmit_hash_policy=layer2+3"
+  # Set to empty string to enable multiple external networks or VLANs
+  NeutronExternalNetworkBridge: "''"
+  # The tunnel type for the tenant network (vxlan or gre). Set to '' to disable tunneling.
+  NeutronTunnelTypes: 'vxlan'
+  NeutronNetworkType: vxlan,vlan
+  NeutronEnableIsolatedMetadata: True
+  CeilometerStorEvents: True
+  CeilometerMeterDispatcher: gnocchi
+  CeilometerEventDispatcher: gnocchi
+  ServiceNetMap:
+    GlanceApiNetwork: internal_api
+    GlanceRegistryNetwork: internal_api
+    KeystoneAdminApiNetwork: internal_api
+    KeystonePublicApiNetwork: internal_api
+    SwiftMgmtNetwork: storage_mgmt
+    SwiftProxyNetwork: storage
