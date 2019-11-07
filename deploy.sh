@@ -3,11 +3,12 @@ openstack overcloud deploy --templates \
 -n ~/templates/network_data.yaml \
 -e /usr/share/openstack-tripleo-heat-templates/environments/network-environment.yaml \
 -e /usr/share/openstack-tripleo-heat-templates/environments/network-isolation.yaml \
+-e ~/templates/scheduler-hints.yaml \
 -e ~/templates/network.yaml \
 -e ~/templates/kvm.yaml \
 -e ~/templates/tuning.yaml \
 -e ~/templates/root-password.yaml \
 -e ~/templates/containers-prepare-parameter.yaml \
 -e /usr/share/openstack-tripleo-heat-templates/environments/docker-ha.yaml \
--e ~/templates/overcloud-passwords.yaml
+-e ~/templates/overcloud-passwords.yaml \
 --ntp pool.ntp.org 
