@@ -1,0 +1,13 @@
+parameter_defaults:
+  ControllerSchedulerHints:
+    'capabilities:node': 'controller-%index%'
+  NovaComputeSchedulerHints:
+    'capabilities:node': 'compute-%index%'
+  ComputeLocalEphemeralSchedulerHints:
+    'capabilities:node': 'compute-%index%'
+  HostnameMap:
+    controller-0: controller-0
+    controller-1: controller-1
+    controller-2: controller-2
+    compute-0: compute-01
+    compute-1: compute02
